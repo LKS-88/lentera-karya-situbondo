@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Lentera Karya Situbondo - Wadah promosi dan jaringan bisnis UMKM Situbondo">
-    <meta name="keywords" content="lentera karya, situbondo, umkm, bisnis digital, pengusaha situbondo">
-    <title>Lentera Karya Situbondo | Wadah UMKM Digital</title>
+    <meta name="description" content="Lentera Karya Situbondo - Wadah promosi dan jaringan bisnis UMKM Situbondo dengan AnekaMarket, solusi aplikasi web murah untuk bisnis Anda">
+    <meta name="keywords" content="lentera karya, situbondo, umkm, bisnis digital, aplikasi kasir, anekamarket, toko online murah">
+    <title>AnekaMarket by Lentera Karya | Aplikasi Web Murah untuk UMKM</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" href="https://raw.githubusercontent.com/LKS-88/lentera-karya-situbondo/refs/heads/main/logo-anekamarket.png" type="image/png">
@@ -225,6 +225,17 @@
             transform: translateY(-3px);
             box-shadow: var(--shadow-lg);
             background: var(--gradient-dark);
+            opacity: 0.9;
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(37, 211, 102, 0.3);
             opacity: 0.9;
         }
 
@@ -556,6 +567,85 @@
             font-size: 0.95rem;
             color: var(--text-light);
             font-style: italic;
+        }
+
+        /* AnekaMarket Section */
+        .anekamarket {
+            background-color: var(--light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .anekamarket::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="rgba(230, 126, 34, 0.03)" d="M0,0 L100,0 L100,100 L0,100 Z"></path></svg>');
+            background-size: cover;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .anekamarket-container {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .anekamarket-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            border-top: 5px solid rgba(230, 126, 34, 0.3);
+            text-align: left;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+            border-top-color: var(--primary);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-title {
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            font-weight: 700;
+        }
+
+        .feature-desc {
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .price-tag {
+            display: inline-block;
+            background: var(--gradient-primary);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-top: 1rem;
+            box-shadow: var(--shadow-sm);
         }
 
         /* Vision Section - Enhanced with Particles */
@@ -1391,14 +1481,15 @@
             <div class="nav-links">
                 <a href="#home" class="active">Beranda</a>
                 <a href="#about">Tentang Saya</a>
+                <a href="#anekamarket">AnekaMarket</a>
                 <a href="#vision">Visi</a>
                 <a href="#testimonials">Testimoni</a>
                 <a href="#contact">Kontak</a>
                 <a href="https://lks-88.github.io/aplikasi-anekamarket" class="btn btn-secondary btn-nav" target="_blank">
-                    <i class="fas fa-cash-register"></i> Order Aplikasi Kasir UMKM
+                    <i class="fas fa-cash-register"></i> Order Aplikasi
                 </a>
                 <a href="https://lenterakarya.github.io/testimoni/" class="btn btn-primary btn-nav" target="_blank">
-                    <i class="fas fa-comment-alt"></i> Lihat Testimoni
+                    <i class="fas fa-comment-alt"></i> Testimoni
                 </a>
             </div>
             
@@ -1412,14 +1503,15 @@
     <div class="mobile-menu" id="mobileMenu">
         <a href="#home">Beranda</a>
         <a href="#about">Tentang Saya</a>
+        <a href="#anekamarket">AnekaMarket</a>
         <a href="#vision">Visi</a>
         <a href="#testimonials">Testimoni</a>
         <a href="#contact">Kontak</a>
         <a href="https://lks-88.github.io/aplikasi-anekamarket" class="btn btn-secondary btn-nav" target="_blank">
-            <i class="fas fa-cash-register"></i> Order Aplikasi Kasir UMKM
+            <i class="fas fa-cash-register"></i> Order Aplikasi
         </a>
         <a href="https://lenterakarya.github.io/testimoni/" class="btn btn-primary btn-nav" target="_blank">
-            <i class="fas fa-comment-alt"></i> Lihat Testimoni
+            <i class="fas fa-comment-alt"></i> Testimoni
         </a>
     </div>
     <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
@@ -1431,21 +1523,21 @@
             <div class="logo">
                 <img src="https://raw.githubusercontent.com/LenteraKarya/tentang-LKS/refs/heads/main/foto-founder.jpeg" alt="Founder Lentera Karya" class="float">
                 <div class="logo-text">
-                    <span class="logo-main">Lentera Karya Situbondo</span>
-                    <span class="logo-sub">Wadah Promosi dan Jaringan Bisnis UMKM Situbondo</span>
+                    <span class="logo-main">AnekaMarket by Lentera Karya</span>
+                    <span class="logo-sub">Solusi Aplikasi Web Murah untuk UMKM Anda</span>
                 </div>
             </div>
-            <p class="tagline fade-in">Membangun ekosistem bisnis digital yang inklusif untuk UMKM Situbondo. Bersama kita wujudkan mimpi bisnis Anda dengan strategi yang tepat dan terukur.</p>
+            <p class="tagline fade-in">Transformasi bisnis Anda dengan aplikasi web profesional harga terjangkau. Mulai dari Rp 500.000 saja, dapatkan sistem lengkap untuk mengelola toko, kasir, inventaris, dan laporan keuangan dengan mudah!</p>
             
             <div class="header-buttons fade-in delay-1">
-                <a href="#about" class="btn btn-primary">
-                    <i class="fas fa-user-tie"></i> Kenali Saya
+                <a href="https://lks-88.github.io/aplikasi-kasir-gratis/" class="btn btn-success" target="_blank">
+                    <i class="fas fa-play-circle"></i> Coba Gratis Sekarang
+                </a>
+                <a href="#anekamarket" class="btn btn-primary">
+                    <i class="fas fa-star"></i> Lihat Fitur
                 </a>
                 <a href="#contact" class="btn btn-outline">
-                    <i class="fas fa-phone-alt"></i> Hubungi Kami
-                </a>
-                <a href="https://lks-88.github.io/aplikasi-anekamarket" class="btn btn-secondary" target="_blank">
-                    <i class="fas fa-cash-register"></i> Order Aplikasi Kasir UMKM
+                    <i class="fas fa-phone-alt"></i> Konsultasi Gratis
                 </a>
             </div>
         </div>
@@ -1462,14 +1554,89 @@
                     <h2 class="section-title">Tentang Saya</h2>
                     <div class="about-text">
                         <p>Saya adalah seorang putra daerah kelahiran Situbondo, lulusan SMK IBRAHIMY SITUBONDO, yang kini berusia 36 tahun dan berprofesi sebagai tenaga honorer. Meski berlatar belakang pendidikan sederhana, saya memiliki mimpi besar: menjadi pengusaha yang tumbuh dari nol dan memberi manfaat seluas-luasnya bagi masyarakat.</p>
-                        <p>Berangkat dari visi tersebut, saya membangun Lentera Karya Situbondo sebuah platform digital yang dirancang sebagai wadah promosi, publikasi, dan jaringan bisnis bagi para pelaku UMKM, khususnya di Situbondo. Platform ini bukan hanya untuk usaha saya sendiri, tetapi terbuka bagi semua pengusaha kecil dan menengah yang ingin berkembang bersama.</p>
-                        <p>Saya terinspirasi oleh semangat dan slogan kepemimpinan Bupati Situbondo saat ini, Mas Rio: "Situbondo Naik Kelas." Inilah yang menjadi bahan bakar visi saya mendorong UMKM lokal agar mampu naik kelas dan bersaing secara sehat dalam ekosistem digital yang inklusif dan berdaya saing.</p>
-                        <p>Saya percaya bahwa perubahan besar selalu dimulai dari langkah sederhana. Lentera Karya adalah langkah awal saya menuju cita-cita besar itu, dan saya berharap platform ini akan menjadi ruang kolaboratif yang mendukung pertumbuhan UMKM dari akar rumput hingga tingkat nasional.</p>
+                        <p>Berangkat dari visi tersebut, saya membangun AnekaMarket sebagai bagian dari Lentera Karya Situbondo - sebuah platform digital yang dirancang khusus untuk membantu UMKM memiliki sistem aplikasi web profesional dengan harga yang sangat terjangkau. Saya memahami betul kebutuhan pengusaha kecil akan teknologi yang mudah digunakan namun powerful.</p>
+                        <p>Dengan semangat "Situbondo Naik Kelas" dari Bupati Situbondo, Mas Rio, saya berkomitmen untuk membantu UMKM lokal naik kelas melalui solusi teknologi tepat guna. AnekaMarket hadir sebagai jawaban atas kebutuhan aplikasi web murah namun berkualitas untuk berbagai jenis bisnis.</p>
+                        <p>Saya percaya bahwa setiap pengusaha, berapapun modal awalnya, berhak memiliki sistem digital yang mendukung pertumbuhan bisnisnya. Itulah mengapa AnekaMarket hadir dengan harga yang sangat kompetitif namun tidak mengorbankan kualitas dan fungsionalitas.</p>
                     </div>
                     <div class="signature fade-in delay-2">
-                        <div class="signature-name">Founder Lentera Karya</div>
+                        <div class="signature-name">Founder AnekaMarket</div>
                         <div class="signature-title">Putra Asli Situbondo</div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- AnekaMarket Section -->
+    <section class="anekamarket" id="anekamarket">
+        <div class="container">
+            <div class="anekamarket-container">
+                <h2 class="section-title fade-in">Kenapa Memilih AnekaMarket?</h2>
+                <p class="about-text fade-in delay-1" style="text-align: center; max-width: 800px; margin: 0 auto 3rem;">AnekaMarket adalah solusi lengkap untuk bisnis Anda dengan harga yang sangat terjangkau. Kami menawarkan aplikasi web siap pakai dengan fitur lengkap yang bisa disesuaikan dengan kebutuhan bisnis Anda.</p>
+                
+                <div class="anekamarket-features">
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">
+                            <i class="fas fa-tags"></i>
+                        </div>
+                        <h3 class="feature-title">Aplikasi Kasir Modern</h3>
+                        <p class="feature-desc">Kelola transaksi dengan cepat dan profesional. Sistem kasir kami mudah digunakan bahkan untuk pemula, dengan fitur pencarian produk cepat, berbagai metode pembayaran, dan cetak struk otomatis.</p>
+                        <span class="price-tag">Mulai Rp 500.000</span>
+                    </div>
+                    
+                    <div class="feature-card fade-in delay-1">
+                        <div class="feature-icon">
+                            <i class="fas fa-boxes"></i>
+                        </div>
+                        <h3 class="feature-title">Manajemen Inventaris</h3>
+                        <p class="feature-desc">Pantau stok barang secara real-time, dapatkan notifikasi ketika stok hampir habis, kelola supplier, dan buat laporan stok dengan mudah. Tidak perlu khawatir kehabisan stok atau overstock lagi.</p>
+                        <span class="price-tag">Mulai Rp 750.000</span>
+                    </div>
+                    
+                    <div class="feature-card fade-in delay-2">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3 class="feature-title">Laporan Keuangan</h3>
+                        <p class="feature-desc">Dapatkan insight bisnis Anda melalui berbagai laporan keuangan: laba rugi, penjualan harian/mingguan/bulanan, produk terlaris, dan lainnya. Semua data tersaji dalam grafik yang mudah dipahami.</p>
+                        <span class="price-tag">Mulai Rp 1.000.000</span>
+                    </div>
+                    
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">
+                            <i class="fas fa-store"></i>
+                        </div>
+                        <h3 class="feature-title">Toko Online Sederhana</h3>
+                        <p class="feature-desc">Miliki website toko online profesional dengan fitur katalog produk, keranjang belanja, dan sistem checkout. Dapatkan channel penjualan baru tanpa biaya mahal.</p>
+                        <span class="price-tag">Mulai Rp 1.500.000</span>
+                    </div>
+                    
+                    <div class="feature-card fade-in delay-1">
+                        <div class="feature-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3 class="feature-title">Responsive Design</h3>
+                        <p class="feature-desc">Aplikasi kami bekerja sempurna di semua perangkat: desktop, tablet, maupun smartphone. Akses bisnis Anda kapan saja, di mana saja.</p>
+                        <span class="price-tag">Termasuk Semua Paket</span>
+                    </div>
+                    
+                    <div class="feature-card fade-in delay-2">
+                        <div class="feature-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h3 class="feature-title">Dukungan Penuh</h3>
+                        <p class="feature-desc">Kami memberikan pelatihan penggunaan, panduan lengkap, dan dukungan teknis selama Anda menggunakan aplikasi. Tidak perlu khawatir jika Anda bukan ahli teknologi.</p>
+                        <span class="price-tag">Termasuk Semua Paket</span>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 4rem; text-align: center;" class="fade-in delay-3">
+                    <a href="https://lks-88.github.io/aplikasi-kasir-gratis/" class="btn btn-success" target="_blank" style="margin-right: 1rem;">
+                        <i class="fas fa-play-circle"></i> Coba Versi Gratis
+                    </a>
+                    <a href="https://lks-88.github.io/aplikasi-anekamarket" class="btn btn-primary" target="_blank">
+                        <i class="fas fa-shopping-cart"></i> Order Sekarang
+                    </a>
                 </div>
             </div>
         </div>
@@ -1480,11 +1647,11 @@
         <div id="vision-particles"></div>
         <div class="container">
             <div class="vision-container">
-                <h2 class="vision-title fade-in">Visi & Misi</h2>
+                <h2 class="vision-title fade-in">Visi & Misi AnekaMarket</h2>
                 <div class="vision-content fade-in delay-1">
-                    Membangun ekosistem bisnis digital yang kuat untuk UMKM Situbondo, menciptakan jaringan kolaboratif yang saling mendukung, dan membawa produk lokal ke panggung yang lebih luas. Dengan semangat "Situbondo Naik Kelas", saya berkomitmen untuk menjadi bagian dari transformasi ekonomi digital di daerah tercinta ini.
+                    Membawa revolusi digital ke UMKM Situbondo dan sekitarnya dengan menyediakan solusi teknologi yang terjangkau, mudah digunakan, dan powerful. Kami percaya bahwa setiap pengusaha, berapapun besar modal awalnya, berhak memiliki sistem yang mendukung pertumbuhan bisnisnya. Dengan AnekaMarket, kami ingin memecah hambatan teknologi yang selama ini membuat banyak UMKM kesulitan bersaing di era digital.
                 </div>
-                <div class="vision-slogan fade-in delay-2">"Dari Situbondo untuk Indonesia"</div>
+                <div class="vision-slogan fade-in delay-2">"Teknologi Berkualitas, Harga Bersahabat, Untuk UMKM Tangguh"</div>
             </div>
         </div>
     </section>
@@ -1493,7 +1660,7 @@
     <section class="testimonials" id="testimonials">
         <div class="container">
             <div class="testimonial-header">
-                <h2 class="section-title fade-in">Testimoni Klien</h2>
+                <h2 class="section-title fade-in">Apa Kata Mereka Tentang AnekaMarket?</h2>
                 <a href="https://lenterakarya.github.io/testimoni/" class="btn btn-primary fade-in delay-1" target="_blank">
                     <i class="fas fa-comment-alt"></i> Lihat Semua Testimoni
                 </a>
@@ -1502,7 +1669,7 @@
             <div class="testimonial-grid">
                 <div class="testimonial-card fade-in">
                     <div class="testimonial-text">
-                        "Lentera Karya telah membantu saya memperluas jaringan bisnis saya secara signifikan. Dalam waktu singkat, omzet saya meningkat 40% berkat strategi pemasaran digital mereka."
+                        "Saya tidak percaya bisa mendapatkan aplikasi sekelas ini dengan harga segini. AnekaMarket benar-benar memahami kebutuhan UMKM seperti saya yang modalnya terbatas tapi butuh sistem yang bagus."
                     </div>
                     <div class="rating">
                         <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
@@ -1511,14 +1678,14 @@
                         <div class="testimonial-avatar">A</div>
                         <div class="author-info">
                             <h4>Ahmad Fauzi</h4>
-                            <p>Pemilik UMKM Keripik Tempe</p>
+                            <p>Pemilik Toko Kelontong</p>
                         </div>
                     </div>
                 </div>
                 
                 <div class="testimonial-card fade-in delay-1">
                     <div class="testimonial-text">
-                        "Sebagai pengusaha kecil, saya kesulitan menjangkau pasar yang lebih luas. Berkat Lentera Karya, produk saya sekarang dikenal hingga luar kota. Pelayanan mereka sangat profesional."
+                        "Setelah pakai AnekaMarket, saya bisa lebih fokus melayani pelanggan karena urusan stok dan keuangan sudah dihandle sistem. Yang paling saya suka adalah fitur notifikasi stok hampir habis."
                     </div>
                     <div class="rating">
                         <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
@@ -1527,14 +1694,14 @@
                         <div class="testimonial-avatar">S</div>
                         <div class="author-info">
                             <h4>Siti Nurhaliza</h4>
-                            <p>Pemilik Usaha Kue Tradisional</p>
+                            <p>Pemilik Warung Makan</p>
                         </div>
                     </div>
                 </div>
                 
                 <div class="testimonial-card fade-in delay-2">
                     <div class="testimonial-text">
-                        "Saya sangat terkesan dengan pendekatan personal dari tim Lentera Karya. Mereka benar-benar memahami kebutuhan UMKM dan memberikan solusi yang tepat sasaran."
+                        "Pelayanannya sangat personal. Meski saya gaptek, tim AnekaMarket sabar menjelaskan dan menyesuaikan aplikasi dengan kebutuhan toko saya. Sekarang saya punya sistem profesional seperti toko besar!"
                     </div>
                     <div class="rating">
                         <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
@@ -1543,7 +1710,7 @@
                         <div class="testimonial-avatar">B</div>
                         <div class="author-info">
                             <h4>Bambang Sutrisno</h4>
-                            <p>Pemilik Usaha Kerajinan Kayu</p>
+                            <p>Pemilik Toko Bangunan</p>
                         </div>
                     </div>
                 </div>
@@ -1554,7 +1721,9 @@
     <!-- Contact Section -->
     <section class="contact" id="contact">
         <div class="container">
-            <h2 class="section-title fade-in">Hubungi Kami</h2>
+            <h2 class="section-title fade-in">Siap Mengembangkan Bisnis Anda?</h2>
+            <p class="about-text fade-in delay-1" style="text-align: center; max-width: 800px; margin: 0 auto 3rem;">Konsultasikan kebutuhan bisnis Anda secara gratis. Kami akan membantu memilih solusi AnekaMarket yang paling sesuai dengan budget dan kebutuhan Anda.</p>
+            
             <div class="contact-container">
                 <div class="contact-info fade-in">
                     <h3>Informasi Kontak</h3>
@@ -1586,6 +1755,15 @@
                             <p>Senin - Jumat: 08.00 - 17.00<br>Sabtu: 09.00 - 15.00</p>
                         </div>
                     </div>
+                    
+                    <div style="margin-top: 2rem;">
+                        <a href="https://wa.me/6287865614222" class="btn btn-success" target="_blank" style="margin-right: 1rem;">
+                            <i class="fab fa-whatsapp"></i> Chat WhatsApp
+                        </a>
+                        <a href="tel:+6287865614222" class="btn btn-outline" style="color: var(--dark); border-color: var(--dark);">
+                            <i class="fas fa-phone-alt"></i> Telepon Sekarang
+                        </a>
+                    </div>
                 </div>
                 <div class="contact-form fade-in delay-1">
                     <h3>Kirim Pesan</h3>
@@ -1599,19 +1777,20 @@
                             <input type="email" id="email" required placeholder="Masukkan alamat email aktif">
                         </div>
                         <div class="form-group">
-                            <label for="subject">Subjek</label>
+                            <label for="subject">Jenis Layanan yang Diminati</label>
                             <select id="subject" required>
-                                <option value="" disabled selected>Pilih subjek pesan Anda</option>
-                                <option value="Order Aplikasi Kasir">Order Aplikasi Kasir</option>
-                                <option value="Order Website Sederhana">Order Website Sederhana</option>
-                                <option value="Tanya Harga">Tanya Harga</option>
-                                <option value="Order Aplikasi Lain">Order Aplikasi Lain</option>
-                                <option value="Lainnya">Lainnya</option>
+                                <option value="" disabled selected>Pilih layanan yang Anda butuhkan</option>
+                                <option value="Aplikasi Kasir">Aplikasi Kasir (Rp 500.000)</option>
+                                <option value="Manajemen Inventaris">Manajemen Inventaris (Rp 750.000)</option>
+                                <option value="Laporan Keuangan">Laporan Keuangan (Rp 1.000.000)</option>
+                                <option value="Toko Online">Toko Online (Rp 1.500.000)</option>
+                                <option value="Paket Lengkap">Paket Lengkap (Diskon 20%)</option>
+                                <option value="Konsultasi Gratis">Konsultasi Gratis</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="message">Pesan Anda</label>
-                            <textarea id="message" required placeholder="Tulis pesan Anda secara detail"></textarea>
+                            <textarea id="message" required placeholder="Ceritakan kebutuhan bisnis Anda secara detail"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">
                             <i class="fas fa-paper-plane"></i> Kirim Pesan
@@ -1630,20 +1809,28 @@
                 <div class="footer-col footer-about fade-in">
                     <a href="#" class="footer-logo">
                         <img src="https://raw.githubusercontent.com/LKS-88/lentera-karya-situbondo/refs/heads/main/logo-anekamarket.png" alt="Lentera Karya Logo">
-                        <span>Lentera Karya</span>
+                        <span>AnekaMarket</span>
                     </a>
-                    <p>Wadah promosi dan jaringan bisnis digital untuk UMKM Situbondo. Membangun ekosistem bisnis yang inklusif dan berdaya saing dengan semangat "Situbondo Naik Kelas".</p>
+                    <p>Solusi aplikasi web murah untuk UMKM. Memberikan teknologi berkualitas dengan harga terjangkau untuk membantu pengusaha kecil dan menengah berkembang di era digital.</p>
+                    <div style="margin-top: 1.5rem;">
+                        <a href="https://lks-88.github.io/aplikasi-kasir-gratis/" class="btn btn-success" target="_blank" style="margin-right: 0.5rem; margin-bottom: 0.5rem; padding: 0.7rem 1.5rem;">
+                            <i class="fas fa-play-circle"></i> Coba Gratis
+                        </a>
+                        <a href="https://lks-88.github.io/aplikasi-anekamarket" class="btn btn-primary" target="_blank" style="margin-bottom: 0.5rem; padding: 0.7rem 1.5rem;">
+                            <i class="fas fa-shopping-cart"></i> Order Sekarang
+                        </a>
+                    </div>
                 </div>
                 
                 <div class="footer-col fade-in delay-1">
-                    <h3>Tautan Cepat</h3>
+                    <h3>Layanan Kami</h3>
                     <ul class="footer-links">
-                        <li><i class="fas fa-chevron-right"></i><a href="#home">Beranda</a></li>
-                        <li><i class="fas fa-chevron-right"></i><a href="#about">Tentang Saya</a></li>
-                        <li><i class="fas fa-chevron-right"></i><a href="#vision">Visi</a></li>
-                        <li><i class="fas fa-chevron-right"></i><a href="#testimonials">Testimoni</a></li>
-                        <li><i class="fas fa-chevron-right"></i><a href="#contact">Kontak</a></li>
-                        <li><i class="fas fa-chevron-right"></i><a href="https://lks-88.github.io/aplikasi-anekamarket" target="_blank">Order Aplikasi Kasir UMKM</a></li>
+                        <li><i class="fas fa-chevron-right"></i><a href="#anekamarket">Aplikasi Kasir</a></li>
+                        <li><i class="fas fa-chevron-right"></i><a href="#anekamarket">Manajemen Inventaris</a></li>
+                        <li><i class="fas fa-chevron-right"></i><a href="#anekamarket">Laporan Keuangan</a></li>
+                        <li><i class="fas fa-chevron-right"></i><a href="#anekamarket">Toko Online</a></li>
+                        <li><i class="fas fa-chevron-right"></i><a href="#anekamarket">Paket Lengkap</a></li>
+                        <li><i class="fas fa-chevron-right"></i><a href="#contact">Konsultasi Gratis</a></li>
                     </ul>
                 </div>
                 
@@ -1655,11 +1842,18 @@
                         <div class="contact-info-item"><i class="fas fa-map-marker-alt"></i> Situbondo, Jawa Timur</div>
                         <div class="contact-info-item"><i class="fas fa-clock"></i> Senin-Sabtu, 08.00-17.00</div>
                     </div>
+                    
+                    <h3 style="margin-top: 2rem;">Follow Kami</h3>
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                        <a href="#" style="color: white; font-size: 1.5rem;"><i class="fab fa-facebook"></i></a>
+                        <a href="#" style="color: white; font-size: 1.5rem;"><i class="fab fa-instagram"></i></a>
+                        <a href="#" style="color: white; font-size: 1.5rem;"><i class="fab fa-youtube"></i></a>
+                    </div>
                 </div>
             </div>
             
             <div class="copyright fade-in delay-3">
-                &copy; 2025 Lentera Karya Situbondo. Semua hak dilindungi. | Dibangun dengan <i class="fas fa-heart" style="color: #e74c3c;"></i> untuk UMKM Situbondo
+                &copy; 2025 AnekaMarket by Lentera Karya Situbondo. Semua hak dilindungi. | Dibangun dengan <i class="fas fa-heart" style="color: #e74c3c;"></i> untuk UMKM Indonesia
             </div>
         </div>
     </footer>
@@ -1766,7 +1960,7 @@
             .then(response => response.json())
             .then(data => {
                 // Also send WhatsApp notification
-                const whatsappMessage = `*Pesan Baru dari Website*%0A%0A*Nama:* ${formData.name}%0A*Email:* ${formData.email}%0A*Subjek:* ${formData.subject}%0A%0A*Pesan:*%0A${formData.message}`;
+                const whatsappMessage = `*Pesan Baru dari Website AnekaMarket*%0A%0A*Nama:* ${formData.name}%0A*Email:* ${formData.email}%0A*Layanan yang Diminati:* ${formData.subject}%0A%0A*Pesan:*%0A${formData.message}`;
                 window.open(`https://wa.me/6287865614222?text=${whatsappMessage}`, '_blank');
                 
                 // Show success message

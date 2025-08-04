@@ -2200,7 +2200,17 @@
         // Generate purchase code from name, email, and timestamp
         function generatePurchaseCode(name, email) {
             // Get current timestamp
-            const timestamp = Date.now().toString();
+            const now = new Date();
+            const timestamp = now.getTime().toString();
+            
+            // Format date components for uniqueness
+            const dateStr = [
+                now.getFullYear().toString().substring(2),
+                String(now.getMonth() + 1).padStart(2, '0'),
+                String(now.getDate()).padStart(2, '0'),
+                String(now.getHours()).padStart(2, '0'),
+                String(now.getMinutes()).padStart(2, '0')
+            ].join('');
             
             // Create hash from name and email
             let hash = 0;
@@ -2212,21 +2222,20 @@
                 hash = hash & hash; // Convert to 32bit integer
             }
             
-            // Convert to positive number and take first 8 characters
-            const positiveHash = (hash >>> 0).toString(16).toUpperCase().substring(0, 8);
+            // Convert to positive number and take first 6 characters
+            const positiveHash = Math.abs(hash).toString(36).toUpperCase().substring(0, 6);
             
-            // Combine with timestamp for uniqueness
-            const code = positiveHash + timestamp.substring(timestamp.length - 8);
+            // Combine with date components for uniqueness
+            const code = positiveHash + '-' + dateStr;
             
-            // Format as 4 groups of 4 characters
-            return code.match(/.{1,4}/g).join('-');
+            return code;
         }
 
         // Generate random referral code
         function generateReferralCode() {
-            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // Excluded similar looking characters
             let result = '';
-            for (let i = 0; i < 5; i++) {
+            for (let i = 0; i < 6; i++) {
                 result += chars.charAt(Math.floor(Math.random() * chars.length));
             }
             return result;
@@ -2400,7 +2409,8 @@
                 subject: document.getElementById('subject').value,
                 message: messageInput.value,
                 purchaseCode: purchaseCode.value || null,
-                referralCode: referralCodeValue || null
+                referralCode: referralCodeValue || null,
+                timestamp: new Date().toISOString()
             };
             
             // Prepare WhatsApp message
@@ -2430,6 +2440,7 @@
                     message: formData.message,
                     purchaseCode: formData.purchaseCode,
                     referralCode: formData.referralCode,
+                    timestamp: formData.timestamp,
                     _replyto: formData.email,
                     _subject: `Pesan baru dari ${formData.name} - ${formData.subject}`
                 })

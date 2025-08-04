@@ -1200,6 +1200,22 @@
             display: block;
         }
 
+        /* Character Counter */
+        .char-counter {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            text-align: right;
+            margin-top: 0.3rem;
+        }
+
+        .char-counter.warning {
+            color: var(--primary);
+        }
+
+        .char-counter.error {
+            color: var(--error);
+        }
+
         /* Floating Labels Effect */
         .form-group.focused label {
             transform: translateY(-25px);
@@ -1988,10 +2004,12 @@
                         <div class="form-group">
                             <label for="name">Nama Lengkap</label>
                             <input type="text" id="name" required placeholder="Masukkan nama lengkap Anda">
+                            <div id="nameError" class="error-message">Nama harus berupa huruf dan tidak boleh kosong</div>
                         </div>
                         <div class="form-group">
                             <label for="email">Alamat Email</label>
                             <input type="email" id="email" required placeholder="Masukkan alamat email aktif">
+                            <div id="emailError" class="error-message">Email harus valid (contoh: user@gmail.com)</div>
                         </div>
                         <div class="form-group">
                             <label for="subject">Jenis Layanan yang Diminati</label>
@@ -2007,7 +2025,9 @@
                         </div>
                         <div class="form-group">
                             <label for="message">Detail Kebutuhan Bisnis</label>
-                            <textarea id="message" required placeholder="Jelaskan kebutuhan bisnis Anda secara detail"></textarea>
+                            <textarea id="message" required placeholder="Jelaskan kebutuhan bisnis Anda secara detail" maxlength="300"></textarea>
+                            <div class="char-counter"><span id="charCount">0</span>/300 karakter</div>
+                            <div id="messageError" class="error-message">Detail kebutuhan bisnis tidak boleh kosong</div>
                         </div>
                         
                         <div class="form-buttons" style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
@@ -2024,8 +2044,7 @@
                             <h4>Formulir Pembelian</h4>
                             <div class="form-group">
                                 <label for="purchaseCode">Kode Pembelian</label>
-                                <input type="text" id="purchaseCode" placeholder="Masukkan kode pembelian">
-                                <div id="codeError" class="error-message">Kode tidak valid. Silakan masukkan kode yang benar.</div>
+                                <input type="text" id="purchaseCode" placeholder="Kode akan terisi otomatis" readonly>
                             </div>
                             <div id="referralCode" class="referral-code">
                                 <p>Kode Referral Anda:</p>
@@ -2178,19 +2197,30 @@
             });
         });
 
-        // Valid purchase codes
-        const validCodes = [
-            '99243E6C2757624A',
-            '2348D2F61F54329C',
-            'CB1B7A5F43FDFA4E',
-            '22F661F7C3DE1F71',
-            'A5422A16E6B5B19E',
-            'B7CBD755A619A1FB',
-            '28955961C9574996',
-            '19973C42A16CA8B5',
-            '25C75B8BA4EBE4D1',
-            '6C7AA7AD548494A3'
-        ];
+        // Generate purchase code from name, email, and timestamp
+        function generatePurchaseCode(name, email) {
+            // Get current timestamp
+            const timestamp = Date.now().toString();
+            
+            // Create hash from name and email
+            let hash = 0;
+            const str = name + email + timestamp;
+            
+            for (let i = 0; i < str.length; i++) {
+                const char = str.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash; // Convert to 32bit integer
+            }
+            
+            // Convert to positive number and take first 8 characters
+            const positiveHash = (hash >>> 0).toString(16).toUpperCase().substring(0, 8);
+            
+            // Combine with timestamp for uniqueness
+            const code = positiveHash + timestamp.substring(timestamp.length - 8);
+            
+            // Format as 4 groups of 4 characters
+            return code.match(/.{1,4}/g).join('-');
+        }
 
         // Generate random referral code
         function generateReferralCode() {
@@ -2207,7 +2237,6 @@
         const getReferralBtn = document.getElementById('getReferralBtn');
         const purchaseForm = document.getElementById('purchaseForm');
         const purchaseCode = document.getElementById('purchaseCode');
-        const codeError = document.getElementById('codeError');
         const referralCode = document.getElementById('referralCode');
         const generatedReferral = document.getElementById('generatedReferral');
         const confirmationDialog = document.getElementById('confirmationDialog');
@@ -2216,49 +2245,103 @@
         const confirmNo = document.getElementById('confirmNo');
         const submitBtn = document.getElementById('submitBtn');
         const contactForm = document.getElementById('contactForm');
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const messageInput = document.getElementById('message');
+        const charCount = document.getElementById('charCount');
+        const nameError = document.getElementById('nameError');
+        const emailError = document.getElementById('emailError');
+        const messageError = document.getElementById('messageError');
 
         let referralCodeValue = '';
         let isPaymentConfirmed = false;
 
+        // Character counter for message textarea
+        messageInput.addEventListener('input', function() {
+            const count = this.value.length;
+            charCount.textContent = count;
+            
+            // Update counter color based on length
+            if (count > 250) {
+                charCount.parentElement.classList.add('warning');
+                charCount.parentElement.classList.remove('error');
+            } else if (count >= 300) {
+                charCount.parentElement.classList.add('error');
+                charCount.parentElement.classList.remove('warning');
+            } else {
+                charCount.parentElement.classList.remove('warning', 'error');
+            }
+        });
+
+        // Name validation - letters only
+        nameInput.addEventListener('input', function() {
+            const nameRegex = /^[a-zA-Z\s]*$/;
+            if (!nameRegex.test(this.value)) {
+                nameError.classList.add('active');
+                this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+            } else {
+                nameError.classList.remove('active');
+            }
+        });
+
+        // Email validation - must be valid email with @
+        emailInput.addEventListener('input', function() {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(this.value)) {
+                emailError.classList.add('active');
+            } else {
+                emailError.classList.remove('active');
+            }
+        });
+
         // Toggle purchase form
         buyNowBtn.addEventListener('click', function() {
+            // Validate name and email first
+            if (!nameInput.value.trim()) {
+                nameError.classList.add('active');
+                return;
+            }
+            
+            if (!emailInput.value.trim() || emailError.classList.contains('active')) {
+                emailError.classList.add('active');
+                return;
+            }
+            
+            // Generate purchase code based on name, email, and timestamp
+            const generatedCode = generatePurchaseCode(nameInput.value, emailInput.value);
+            purchaseCode.value = generatedCode;
+            
             purchaseForm.classList.toggle('active');
             if (purchaseForm.classList.contains('active')) {
                 referralCode.classList.remove('active');
-                purchaseCode.focus();
             }
         });
 
         // Get referral code
         getReferralBtn.addEventListener('click', function() {
+            // Validate name and email first
+            if (!nameInput.value.trim()) {
+                nameError.classList.add('active');
+                return;
+            }
+            
+            if (!emailInput.value.trim() || emailError.classList.contains('active')) {
+                emailError.classList.add('active');
+                return;
+            }
+            
             purchaseForm.classList.add('active');
             referralCodeValue = generateReferralCode();
             generatedReferral.textContent = referralCodeValue;
             referralCode.classList.add('active');
             
+            // Generate purchase code based on name, email, and timestamp
+            const generatedCode = generatePurchaseCode(nameInput.value, emailInput.value);
+            purchaseCode.value = generatedCode;
+            
             // Show confirmation dialog
             confirmationReferral.textContent = referralCodeValue;
             confirmationDialog.classList.add('active');
-        });
-
-        // Validate purchase code
-        purchaseCode.addEventListener('input', function() {
-            const code = this.value.trim().toUpperCase();
-            if (validCodes.includes(code)) {
-                codeError.classList.remove('active');
-                referralCodeValue = generateReferralCode();
-                generatedReferral.textContent = referralCodeValue;
-                referralCode.classList.add('active');
-                
-                // Show confirmation dialog
-                confirmationReferral.textContent = referralCodeValue;
-                confirmationDialog.classList.add('active');
-            } else if (code.length === 16) {
-                codeError.classList.add('active');
-            } else {
-                codeError.classList.remove('active');
-                referralCode.classList.remove('active');
-            }
         });
 
         // Confirmation dialog buttons
@@ -2278,6 +2361,26 @@
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
+            // Validate all fields
+            let isValid = true;
+            
+            if (!nameInput.value.trim()) {
+                nameError.classList.add('active');
+                isValid = false;
+            }
+            
+            if (!emailInput.value.trim() || emailError.classList.contains('active')) {
+                emailError.classList.add('active');
+                isValid = false;
+            }
+            
+            if (!messageInput.value.trim()) {
+                messageError.classList.add('active');
+                isValid = false;
+            }
+            
+            if (!isValid) return;
+            
             // Check if purchase form is active and validated
             if (purchaseForm.classList.contains('active') && !isPaymentConfirmed) {
                 alert('Silakan konfirmasi pembayaran terlebih dahulu sebelum mengirim formulir.');
@@ -2292,10 +2395,10 @@
             
             // Get form data
             const formData = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
+                name: nameInput.value,
+                email: emailInput.value,
                 subject: document.getElementById('subject').value,
-                message: document.getElementById('message').value,
+                message: messageInput.value,
                 purchaseCode: purchaseCode.value || null,
                 referralCode: referralCodeValue || null
             };
@@ -2370,6 +2473,9 @@
                     submitBtn.innerHTML = originalText;
                     submitBtn.disabled = false;
                     isPaymentConfirmed = false;
+                    charCount.textContent = '0';
+                    purchaseCode.value = '';
+                    referralCodeValue = '';
                 }, 2000);
             })
             .catch(error => {

@@ -23,6 +23,7 @@
             --text-light: #777;
             --text-lighter: #999;
             --success: #38a169;
+            --error: #e74c3c;
             --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
             --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
             --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.12);
@@ -648,6 +649,54 @@
             box-shadow: var(--shadow-sm);
         }
 
+        /* Package Info Section */
+        .package-info {
+            background-color: white;
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin: 3rem auto;
+            max-width: 800px;
+            box-shadow: var(--shadow-md);
+            border-left: 5px solid var(--primary);
+        }
+
+        .package-info h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        .package-info-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .package-type {
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            background-color: var(--light);
+        }
+
+        .package-type h4 {
+            color: var(--dark);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .package-type h4 i {
+            color: var(--primary);
+        }
+
+        .package-type p {
+            color: var(--text);
+            line-height: 1.7;
+        }
+
         /* Benefit Card */
         .benefit-card {
             background: white;
@@ -1057,6 +1106,100 @@
             background-size: 1em;
         }
 
+        /* Purchase Form */
+        .purchase-form {
+            display: none;
+            background-color: var(--light);
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            margin-top: 2rem;
+            border: 1px solid #e0e0e0;
+        }
+
+        .purchase-form.active {
+            display: block;
+        }
+
+        .purchase-form h4 {
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            font-size: 1.2rem;
+        }
+
+        .referral-code {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background-color: rgba(230, 126, 34, 0.1);
+            border-radius: var(--radius-sm);
+            display: none;
+        }
+
+        .referral-code.active {
+            display: block;
+        }
+
+        .referral-code p {
+            margin-bottom: 1rem;
+        }
+
+        .referral-code-value {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--primary);
+            letter-spacing: 2px;
+        }
+
+        .confirmation-dialog {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .confirmation-dialog.active {
+            display: flex;
+        }
+
+        .confirmation-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            max-width: 500px;
+            width: 90%;
+            box-shadow: var(--shadow-xl);
+            text-align: center;
+        }
+
+        .confirmation-content h4 {
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        .confirmation-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        /* Error Message */
+        .error-message {
+            color: var(--error);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .error-message.active {
+            display: block;
+        }
+
         /* Floating Labels Effect */
         .form-group.focused label {
             transform: translateY(-25px);
@@ -1329,6 +1472,10 @@
                 max-width: 500px;
                 margin: 0 auto;
             }
+
+            .package-info-content {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 768px) {
@@ -1444,6 +1591,10 @@
             
             .about-image {
                 height: 300px;
+            }
+
+            .confirmation-buttons {
+                flex-direction: column;
             }
         }
 
@@ -1601,6 +1752,21 @@
             <div class="anekamarket-container">
                 <h2 class="section-title fade-in">Keunggulan AnekaMarket</h2>
                 <p class="about-text fade-in delay-1" style="text-align: center; max-width: 800px; margin: 0 auto 3rem;">AnekaMarket menyediakan solusi terintegrasi yang dirancang khusus untuk memenuhi kebutuhan operasional bisnis UMKM. Dengan antarmuka yang intuitif dan fitur lengkap, kami membantu Anda mengelola bisnis secara lebih efisien dan profesional.</p>
+                
+                <!-- Package Info Section -->
+                <div class="package-info fade-in">
+                    <h3>Pilihan Paket Layanan</h3>
+                    <div class="package-info-content">
+                        <div class="package-type">
+                            <h4><i class="fas fa-box-open"></i> Paket Basic</h4>
+                            <p>Paket Basic adalah solusi ideal untuk UMKM yang membutuhkan satu aplikasi spesifik untuk mendukung operasional bisnis. Dengan harga terjangkau mulai dari Rp 500.000, Anda dapat memilih salah satu aplikasi seperti aplikasi kasir, aplikasi absensi karyawan, atau aplikasi lainnya sesuai kebutuhan spesifik bisnis Anda. Paket ini memberikan solusi tepat guna dengan fitur lengkap untuk satu aspek manajemen bisnis Anda.</p>
+                        </div>
+                        <div class="package-type">
+                            <h4><i class="fas fa-gem"></i> Paket Spesial</h4>
+                            <p>Paket Spesial merupakan solusi komprehensif untuk bisnis yang ingin memiliki sistem terintegrasi. Dengan membeli Paket Spesial, Anda mendapatkan aplikasi utama pilihan Anda plus website profesional untuk bisnis Anda. Bonus tambahan: Gratis aplikasi memo internal untuk komunikasi tim. Paket ini dirancang untuk memberikan nilai tambah maksimal dengan investasi yang tetap terjangkau untuk skala UMKM.</p>
+                        </div>
+                    </div>
+                </div>
                 
                 <div class="anekamarket-features">
                     <div class="feature-card fade-in">
@@ -1843,7 +2009,32 @@
                             <label for="message">Detail Kebutuhan Bisnis</label>
                             <textarea id="message" required placeholder="Jelaskan kebutuhan bisnis Anda secara detail"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">
+                        
+                        <div class="form-buttons" style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
+                            <button type="button" id="buyNowBtn" class="btn btn-primary" style="flex: 1;">
+                                <i class="fas fa-shopping-cart"></i> Beli Sekarang
+                            </button>
+                            <button type="button" id="getReferralBtn" class="btn btn-secondary" style="flex: 1;">
+                                <i class="fas fa-gift"></i> Dapatkan Kode Referal
+                            </button>
+                        </div>
+                        
+                        <!-- Purchase Form -->
+                        <div id="purchaseForm" class="purchase-form">
+                            <h4>Formulir Pembelian</h4>
+                            <div class="form-group">
+                                <label for="purchaseCode">Kode Pembelian</label>
+                                <input type="text" id="purchaseCode" placeholder="Masukkan kode pembelian">
+                                <div id="codeError" class="error-message">Kode tidak valid. Silakan masukkan kode yang benar.</div>
+                            </div>
+                            <div id="referralCode" class="referral-code">
+                                <p>Kode Referral Anda:</p>
+                                <div class="referral-code-value" id="generatedReferral"></div>
+                                <p>Silakan lakukan pembayaran kepada admin dan berikan kode referral ini untuk mendapatkan cashback.</p>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" id="submitBtn" class="btn btn-primary" style="width: 100%;">
                             <i class="fas fa-paper-plane"></i> Kirim Permohonan
                         </button>
                     </form>
@@ -1851,6 +2042,19 @@
             </div>
         </div>
     </section>
+    
+    <!-- Confirmation Dialog -->
+    <div id="confirmationDialog" class="confirmation-dialog">
+        <div class="confirmation-content">
+            <h4>Konfirmasi Pembayaran</h4>
+            <p>Apakah Anda sudah melakukan pembayaran kepada admin dan akan mengirimkan kode referral ini?</p>
+            <p><strong>Kode Referral:</strong> <span id="confirmationReferral"></span></p>
+            <div class="confirmation-buttons">
+                <button id="confirmYes" class="btn btn-success">Ya, Sudah</button>
+                <button id="confirmNo" class="btn btn-outline" style="color: var(--dark); border-color: var(--dark);">Belum</button>
+            </div>
+        </div>
+    </div>
     
     <!-- Footer with Particles -->
     <footer>
@@ -1974,9 +2178,111 @@
             });
         });
 
+        // Valid purchase codes
+        const validCodes = [
+            '99243E6C2757624A',
+            '2348D2F61F54329C',
+            'CB1B7A5F43FDFA4E',
+            '22F661F7C3DE1F71',
+            'A5422A16E6B5B19E',
+            'B7CBD755A619A1FB',
+            '28955961C9574996',
+            '19973C42A16CA8B5',
+            '25C75B8BA4EBE4D1',
+            '6C7AA7AD548494A3'
+        ];
+
+        // Generate random referral code
+        function generateReferralCode() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let result = '';
+            for (let i = 0; i < 5; i++) {
+                result += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return result;
+        }
+
+        // Purchase form functionality
+        const buyNowBtn = document.getElementById('buyNowBtn');
+        const getReferralBtn = document.getElementById('getReferralBtn');
+        const purchaseForm = document.getElementById('purchaseForm');
+        const purchaseCode = document.getElementById('purchaseCode');
+        const codeError = document.getElementById('codeError');
+        const referralCode = document.getElementById('referralCode');
+        const generatedReferral = document.getElementById('generatedReferral');
+        const confirmationDialog = document.getElementById('confirmationDialog');
+        const confirmationReferral = document.getElementById('confirmationReferral');
+        const confirmYes = document.getElementById('confirmYes');
+        const confirmNo = document.getElementById('confirmNo');
+        const submitBtn = document.getElementById('submitBtn');
+        const contactForm = document.getElementById('contactForm');
+
+        let referralCodeValue = '';
+        let isPaymentConfirmed = false;
+
+        // Toggle purchase form
+        buyNowBtn.addEventListener('click', function() {
+            purchaseForm.classList.toggle('active');
+            if (purchaseForm.classList.contains('active')) {
+                referralCode.classList.remove('active');
+                purchaseCode.focus();
+            }
+        });
+
+        // Get referral code
+        getReferralBtn.addEventListener('click', function() {
+            purchaseForm.classList.add('active');
+            referralCodeValue = generateReferralCode();
+            generatedReferral.textContent = referralCodeValue;
+            referralCode.classList.add('active');
+            
+            // Show confirmation dialog
+            confirmationReferral.textContent = referralCodeValue;
+            confirmationDialog.classList.add('active');
+        });
+
+        // Validate purchase code
+        purchaseCode.addEventListener('input', function() {
+            const code = this.value.trim().toUpperCase();
+            if (validCodes.includes(code)) {
+                codeError.classList.remove('active');
+                referralCodeValue = generateReferralCode();
+                generatedReferral.textContent = referralCodeValue;
+                referralCode.classList.add('active');
+                
+                // Show confirmation dialog
+                confirmationReferral.textContent = referralCodeValue;
+                confirmationDialog.classList.add('active');
+            } else if (code.length === 16) {
+                codeError.classList.add('active');
+            } else {
+                codeError.classList.remove('active');
+                referralCode.classList.remove('active');
+            }
+        });
+
+        // Confirmation dialog buttons
+        confirmYes.addEventListener('click', function() {
+            isPaymentConfirmed = true;
+            confirmationDialog.classList.remove('active');
+            submitBtn.disabled = false;
+        });
+
+        confirmNo.addEventListener('click', function() {
+            isPaymentConfirmed = false;
+            confirmationDialog.classList.remove('active');
+            submitBtn.disabled = true;
+        });
+
         // Form submission with actual email and WhatsApp integration
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
+        contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
+            
+            // Check if purchase form is active and validated
+            if (purchaseForm.classList.contains('active') && !isPaymentConfirmed) {
+                alert('Silakan konfirmasi pembayaran terlebih dahulu sebelum mengirim formulir.');
+                return;
+            }
             
             const submitBtn = this.querySelector('button[type="submit"]');
             const originalText = submitBtn.innerHTML;
@@ -1989,8 +2295,23 @@
                 name: document.getElementById('name').value,
                 email: document.getElementById('email').value,
                 subject: document.getElementById('subject').value,
-                message: document.getElementById('message').value
+                message: document.getElementById('message').value,
+                purchaseCode: purchaseCode.value || null,
+                referralCode: referralCodeValue || null
             };
+            
+            // Prepare WhatsApp message
+            let whatsappMessage = `*Pesan Baru dari Website AnekaMarket*%0A%0A*Nama:* ${formData.name}%0A*Email:* ${formData.email}%0A*Layanan yang Diminati:* ${formData.subject}%0A`;
+            
+            if (formData.purchaseCode) {
+                whatsappMessage += `*Kode Pembelian:* ${formData.purchaseCode}%0A`;
+            }
+            
+            if (formData.referralCode) {
+                whatsappMessage += `*Kode Referral:* ${formData.referralCode}%0A`;
+            }
+            
+            whatsappMessage += `%0A*Pesan:*%0A${formData.message}`;
             
             // Send to email (using FormSubmit.co or similar service)
             fetch('https://formsubmit.co/ajax/lenterakaryasitubondo@gmail.com', {
@@ -2004,14 +2325,15 @@
                     email: formData.email,
                     subject: formData.subject,
                     message: formData.message,
+                    purchaseCode: formData.purchaseCode,
+                    referralCode: formData.referralCode,
                     _replyto: formData.email,
                     _subject: `Pesan baru dari ${formData.name} - ${formData.subject}`
                 })
             })
             .then(response => response.json())
             .then(data => {
-                // Also send WhatsApp notification
-                const whatsappMessage = `*Pesan Baru dari Website AnekaMarket*%0A%0A*Nama:* ${formData.name}%0A*Email:* ${formData.email}%0A*Layanan yang Diminati:* ${formData.subject}%0A%0A*Pesan:*%0A${formData.message}`;
+                // Send WhatsApp notification
                 window.open(`https://wa.me/6285647709114?text=${whatsappMessage}`, '_blank');
                 
                 // Show success message
@@ -2043,8 +2365,11 @@
                 // Reset form after 2 seconds
                 setTimeout(() => {
                     this.reset();
+                    purchaseForm.classList.remove('active');
+                    referralCode.classList.remove('active');
                     submitBtn.innerHTML = originalText;
                     submitBtn.disabled = false;
+                    isPaymentConfirmed = false;
                 }, 2000);
             })
             .catch(error => {

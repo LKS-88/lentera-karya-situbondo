@@ -1299,6 +1299,19 @@
             color: var(--primary);
         }
 
+        /* Form Button Group */
+        .form-button-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-button-group .btn {
+            margin: 0;
+            width: 100%;
+        }
+
         /* Footer - Enhanced with Particles */
         footer {
             background: var(--gradient-footer);
@@ -1690,8 +1703,8 @@
                 flex-direction: column;
             }
 
-            .form-buttons {
-                flex-direction: column;
+            .form-button-group {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -1811,12 +1824,6 @@
                 </a>
                 <a href="#anekamarket" class="btn btn-primary">
                     <i class="fas fa-star"></i> Lihat Fitur
-                </a>
-                <a href="#contact" class="btn btn-outline">
-                    <i class="fas fa-phone-alt"></i> Konsultasi Gratis
-                </a>
-                <a href="https://lks-88.github.io/validasi-referral/" class="btn btn-referral" target="_blank">
-                    <i class="fas fa-check-circle"></i> Cek Referral
                 </a>
             </div>
         </div>
@@ -1954,9 +1961,6 @@
                     <a href="https://lks-88.github.io/aplikasi-anekamarket" class="btn btn-primary" target="_blank">
                         <i class="fas fa-shopping-cart"></i> Pesan Sekarang
                     </a>
-                    <a href="https://lks-88.github.io/validasi-referral/" class="btn btn-referral" target="_blank" style="margin-top: 1rem;">
-                        <i class="fas fa-check-circle"></i> Cek Referral
-                    </a>
                 </div>
             </div>
         </div>
@@ -2083,9 +2087,6 @@
                         <a href="tel:+6285647709114" class="btn btn-outline" style="color: var(--dark); border-color: var(--dark);">
                             <i class="fas fa-phone-alt"></i> Telepon Sekarang
                         </a>
-                        <a href="https://lks-88.github.io/validasi-referral/" class="btn btn-referral" target="_blank" style="margin-top: 1rem;">
-                            <i class="fas fa-check-circle"></i> Cek Referral
-                        </a>
                     </div>
                 </div>
                 <div class="contact-form fade-in delay-1">
@@ -2120,15 +2121,12 @@
                             <div id="messageError" class="error-message">Detail kebutuhan bisnis tidak boleh kosong</div>
                         </div>
                         
-                        <div class="form-buttons" style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
-                            <button type="button" id="buyNowBtn" class="btn btn-primary" style="flex: 1;">
+                        <div class="form-button-group">
+                            <button type="button" id="buyNowBtn" class="btn btn-primary">
                                 <i class="fas fa-shopping-cart"></i> Beli Sekarang
                             </button>
-                            <button type="button" id="getReferralBtn" class="btn btn-secondary" style="flex: 1;">
+                            <button type="button" id="getReferralBtn" class="btn btn-secondary">
                                 <i class="fas fa-gift"></i> Dapatkan Kode Referal
-                            </button>
-                            <button type="button" id="checkReferralBtn" class="btn btn-info" style="flex: 1;">
-                                <i class="fas fa-search"></i> Cek Kode Referal
                             </button>
                         </div>
                         
@@ -2217,7 +2215,6 @@
                         <li><i class="fas fa-chevron-right"></i><a href="#anekamarket">Toko Online Profesional</a></li>
                         <li><i class="fas fa-chevron-right"></i><a href="#anekamarket">Paket Bisnis Lengkap</a></li>
                         <li><i class="fas fa-chevron-right"></i><a href="#contact">Konsultasi Bisnis</a></li>
-                        <li><i class="fas fa-chevron-right"></i><a href="https://lks-88.github.io/validasi-referral/" target="_blank">Validasi Referral</a></li>
                     </ul>
                 </div>
                 
@@ -2373,7 +2370,6 @@
         // Purchase form functionality
         const buyNowBtn = document.getElementById('buyNowBtn');
         const getReferralBtn = document.getElementById('getReferralBtn');
-        const checkReferralBtn = document.getElementById('checkReferralBtn');
         const purchaseForm = document.getElementById('purchaseForm');
         const checkReferralForm = document.getElementById('checkReferralForm');
         const purchaseCode = document.getElementById('purchaseCode');
@@ -2488,13 +2484,6 @@
             // Show confirmation dialog
             confirmationReferral.textContent = referralCodeValue;
             confirmationDialog.classList.add('active');
-        });
-
-        // Check referral code
-        checkReferralBtn.addEventListener('click', function() {
-            purchaseForm.classList.remove('active');
-            checkReferralForm.classList.toggle('active');
-            referralResult.classList.remove('active');
         });
 
         // Submit check referral form

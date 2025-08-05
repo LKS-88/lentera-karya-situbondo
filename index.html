@@ -163,16 +163,16 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 0.9rem 2.2rem;
+            padding: 0.75rem 1.75rem;
             border-radius: 50px;
             font-weight: 600;
             text-decoration: none;
             transition: var(--transition);
             border: 2px solid transparent;
             cursor: pointer;
-            gap: 0.6rem;
+            gap: 0.5rem;
             margin: 0.5rem;
-            font-size: 1.05rem;
+            font-size: 1rem;
             box-shadow: var(--shadow-sm);
             position: relative;
             overflow: hidden;
@@ -237,6 +237,17 @@
         .btn-success:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 24px rgba(37, 211, 102, 0.3);
+            opacity: 0.9;
+        }
+
+        .btn-info {
+            background: linear-gradient(135deg, #17a2b8, #138496);
+            color: white;
+        }
+
+        .btn-info:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(23, 162, 184, 0.3);
             opacity: 0.9;
         }
 
@@ -320,8 +331,9 @@
         }
 
         .nav-links .btn-nav {
-            padding: 0.6rem 1.2rem;
+            padding: 0.5rem 1rem;
             margin-left: 1rem;
+            font-size: 0.9rem;
         }
 
         .mobile-menu-toggle {
@@ -380,6 +392,8 @@
         .mobile-menu .btn-nav {
             margin-top: 1rem;
             text-align: center;
+            padding: 0.8rem;
+            font-size: 1rem;
         }
 
         .mobile-menu-overlay {
@@ -1149,6 +1163,57 @@
             letter-spacing: 2px;
         }
 
+        /* Check Referral Form */
+        .check-referral-form {
+            display: none;
+            background-color: var(--light);
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            margin-top: 2rem;
+            border: 1px solid #e0e0e0;
+        }
+
+        .check-referral-form.active {
+            display: block;
+        }
+
+        .check-referral-form h4 {
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            font-size: 1.2rem;
+        }
+
+        .referral-result {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: var(--radius-sm);
+            display: none;
+        }
+
+        .referral-result.active {
+            display: block;
+        }
+
+        .referral-result.success {
+            background-color: rgba(56, 161, 105, 0.1);
+            border-left: 4px solid var(--success);
+        }
+
+        .referral-result.error {
+            background-color: rgba(231, 76, 60, 0.1);
+            border-left: 4px solid var(--error);
+        }
+
+        .referral-result p {
+            margin-bottom: 1rem;
+        }
+
+        .referral-result-value {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        /* Confirmation Dialog */
         .confirmation-dialog {
             display: none;
             position: fixed;
@@ -1573,7 +1638,8 @@
             .btn {
                 width: 100%;
                 margin: 0.5rem 0;
-                padding: 0.9rem 1.5rem;
+                padding: 0.8rem 1.2rem;
+                font-size: 0.95rem;
             }
             
             .section-title {
@@ -1610,6 +1676,10 @@
             }
 
             .confirmation-buttons {
+                flex-direction: column;
+            }
+
+            .form-buttons {
                 flex-direction: column;
             }
         }
@@ -2037,6 +2107,9 @@
                             <button type="button" id="getReferralBtn" class="btn btn-secondary" style="flex: 1;">
                                 <i class="fas fa-gift"></i> Dapatkan Kode Referal
                             </button>
+                            <button type="button" id="checkReferralBtn" class="btn btn-info" style="flex: 1;">
+                                <i class="fas fa-search"></i> Cek Kode Referal
+                            </button>
                         </div>
                         
                         <!-- Purchase Form -->
@@ -2050,6 +2123,22 @@
                                 <p>Kode Referral Anda:</p>
                                 <div class="referral-code-value" id="generatedReferral"></div>
                                 <p>Silakan lakukan pembayaran kepada admin dan berikan kode referral ini untuk mendapatkan cashback.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Check Referral Form -->
+                        <div id="checkReferralForm" class="check-referral-form">
+                            <h4>Cek Status Referral</h4>
+                            <div class="form-group">
+                                <label for="referralToCheck">Masukkan Kode Referral</label>
+                                <input type="text" id="referralToCheck" placeholder="Masukkan kode referral yang ingin dicek">
+                            </div>
+                            <button type="button" id="checkReferralSubmit" class="btn btn-info" style="width: 100%; margin-bottom: 1rem;">
+                                <i class="fas fa-search"></i> Cek Status
+                            </button>
+                            <div id="referralResult" class="referral-result">
+                                <p>Status Referral:</p>
+                                <div class="referral-result-value" id="referralStatus"></div>
                             </div>
                         </div>
                         
@@ -2241,13 +2330,35 @@
             return result;
         }
 
+        // Check referral code (mock function - in real app this would call an API)
+        function checkReferralCode(code) {
+            // This is a mock function - in a real app you would call your backend API
+            // For demo purposes, we'll randomly return valid or invalid
+            const isValid = Math.random() > 0.3; // 70% chance of being valid
+            
+            return {
+                valid: isValid,
+                message: isValid ? 
+                    'Kode referral valid! Cashback Rp 50.000 akan diproses setelah pembayaran.' : 
+                    'Kode referral tidak valid atau sudah digunakan.',
+                referrer: isValid ? 'Ahmad Fauzi' : null,
+                date: isValid ? new Date().toLocaleDateString() : null
+            };
+        }
+
         // Purchase form functionality
         const buyNowBtn = document.getElementById('buyNowBtn');
         const getReferralBtn = document.getElementById('getReferralBtn');
+        const checkReferralBtn = document.getElementById('checkReferralBtn');
         const purchaseForm = document.getElementById('purchaseForm');
+        const checkReferralForm = document.getElementById('checkReferralForm');
         const purchaseCode = document.getElementById('purchaseCode');
         const referralCode = document.getElementById('referralCode');
         const generatedReferral = document.getElementById('generatedReferral');
+        const referralResult = document.getElementById('referralResult');
+        const referralStatus = document.getElementById('referralStatus');
+        const referralToCheck = document.getElementById('referralToCheck');
+        const checkReferralSubmit = document.getElementById('checkReferralSubmit');
         const confirmationDialog = document.getElementById('confirmationDialog');
         const confirmationReferral = document.getElementById('confirmationReferral');
         const confirmYes = document.getElementById('confirmYes');
@@ -2323,6 +2434,7 @@
             purchaseForm.classList.toggle('active');
             if (purchaseForm.classList.contains('active')) {
                 referralCode.classList.remove('active');
+                checkReferralForm.classList.remove('active');
             }
         });
 
@@ -2340,6 +2452,7 @@
             }
             
             purchaseForm.classList.add('active');
+            checkReferralForm.classList.remove('active');
             referralCodeValue = generateReferralCode();
             generatedReferral.textContent = referralCodeValue;
             referralCode.classList.add('active');
@@ -2351,6 +2464,38 @@
             // Show confirmation dialog
             confirmationReferral.textContent = referralCodeValue;
             confirmationDialog.classList.add('active');
+        });
+
+        // Check referral code
+        checkReferralBtn.addEventListener('click', function() {
+            purchaseForm.classList.remove('active');
+            checkReferralForm.classList.toggle('active');
+            referralResult.classList.remove('active');
+        });
+
+        // Submit check referral form
+        checkReferralSubmit.addEventListener('click', function() {
+            const code = referralToCheck.value.trim();
+            
+            if (!code) {
+                alert('Silakan masukkan kode referral yang ingin dicek');
+                return;
+            }
+            
+            // Check referral code (in real app this would be an API call)
+            const result = checkReferralCode(code);
+            
+            // Display result
+            referralStatus.textContent = result.message;
+            referralResult.className = 'referral-result ' + (result.valid ? 'success' : 'error');
+            referralResult.classList.add('active');
+            
+            // Add additional info if valid
+            if (result.valid) {
+                const info = document.createElement('p');
+                info.textContent = `Direferensikan oleh: ${result.referrer} pada ${result.date}`;
+                referralResult.appendChild(info);
+            }
         });
 
         // Confirmation dialog buttons
@@ -2480,13 +2625,16 @@
                 setTimeout(() => {
                     this.reset();
                     purchaseForm.classList.remove('active');
+                    checkReferralForm.classList.remove('active');
                     referralCode.classList.remove('active');
+                    referralResult.classList.remove('active');
                     submitBtn.innerHTML = originalText;
                     submitBtn.disabled = false;
                     isPaymentConfirmed = false;
                     charCount.textContent = '0';
                     purchaseCode.value = '';
                     referralCodeValue = '';
+                    referralToCheck.value = '';
                 }, 2000);
             })
             .catch(error => {
